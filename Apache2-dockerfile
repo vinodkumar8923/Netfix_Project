@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+
+MAINTAINER "Team techlala"
+
+RUN apt-get update -y  && \
+    apt-get install -y apache2 net-tools  && \
+    apt-get clean all
+
+COPY ./index.html /var/www/html
+COPY ./dockerfile1  /root/
+WORKDIR /var/www/html
+VOLUME /var/www/html
+EXPOSE 80 443
+ENTRYPOINT ["/usr/sbin/apache2ctl","-D","FOREGROUND"]
+
